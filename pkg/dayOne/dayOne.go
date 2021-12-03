@@ -38,22 +38,14 @@ func PartTwo() (ans int) {
 
 	dataStr := string(data)
 	dataSlc := strings.Split(dataStr, "\n")
-
-	var intMap []int
-
-	for _, x := range dataSlc {
-		val, err := strconv.Atoi(x)
-		check(err)
-		intMap = append(intMap, val)
-	}
-
-	prev := (intMap[0] + intMap[1] + intMap[2])
 	for i := 3; i < len(dataSlc); i++ {
-		curval := prev - intMap[i-3] + intMap[i]
+		prev, err := strconv.Atoi(dataSlc[i-3])
+		check(err)
+		curval, err := strconv.Atoi(dataSlc[i])
+		check(err)
 		if curval > prev {
 			ans++
 		}
-		prev = curval
 	}
 	return
 }
