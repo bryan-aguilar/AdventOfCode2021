@@ -5,9 +5,24 @@ package main
 import (
 	dayOne "aoc21/pkg/dayOne"
 	"fmt"
+	"os"
+	"strconv"
 )
 
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+
 func main() {
-	fmt.Println(dayOne.PartOne())
-	fmt.Println(dayOne.PartTwo())
+	dayCmd, err := strconv.Atoi(os.Args[1])
+	check(err)
+	var p1, p2 int
+	switch dayCmd {
+	case 1:
+		p1 = dayOne.PartOne()
+		p2 = dayOne.PartTwo()
+	}
+	fmt.Printf("Part one: %d \nPart Two: %d \n", p1, p2)
 }
