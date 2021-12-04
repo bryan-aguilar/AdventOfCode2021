@@ -25,8 +25,10 @@ func main() {
 		p1 = dayOne.PartOne()
 		p2 = dayOne.PartTwo()
 	case 2:
-		p1 = dayTwo.PartOne()
-		p2 = dayTwo.PartTwo()
+		input, err := os.ReadFile("inputs/dayTwoInput.txt")
+		check(err)
+		p1 = dayTwo.PartOne(string(input))
+		p2 = dayTwo.PartTwo(string(input))
 	}
 	fmt.Printf("Part one: %d \nPart Two: %d \n", p1, p2)
 }

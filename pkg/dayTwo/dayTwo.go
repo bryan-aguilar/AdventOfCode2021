@@ -2,17 +2,13 @@ package daytwo
 
 import (
 	ec "aoc21/internal/errCheck"
-	"os"
 	"strconv"
 	"strings"
 )
 
-func PartOne() (ans int) {
-	data, err := os.ReadFile("inputs/dayTwoInput.txt")
-	ec.Check(err)
+func PartOne(input string) (ans int) {
 
-	dataStr := strings.Split(string(data), "\n")
-
+	dataStr := strings.Split(input, "\n")
 	var depth, distance int
 	for _, val := range dataStr {
 		x := strings.Split(val, " ")
@@ -31,11 +27,8 @@ func PartOne() (ans int) {
 	return
 }
 
-func PartTwo() (ans int) {
-	data, err := os.ReadFile("inputs/dayTwoInput.txt")
-	ec.Check(err)
-
-	dataStr := strings.Split(string(data), "\n")
+func PartTwo(input string) (ans int) {
+	dataStr := strings.Split(input, "\n")
 
 	var depth, distance, aim int
 	for _, val := range dataStr {
