@@ -3,6 +3,7 @@ package main
 // Take in command line arguments to process which day we want
 // Daily problems will be stored in there applicable package directory
 import (
+	"aoc21/pkg/dayFour"
 	dayOne "aoc21/pkg/dayOne"
 	"aoc21/pkg/dayThree"
 	dayTwo "aoc21/pkg/dayTwo"
@@ -35,6 +36,10 @@ func main() {
 		check(err)
 		p1 = dayThree.PartOne(string(input))
 		p2 = dayThree.PartTwo(string(input))
+	case 4:
+		input, err := os.ReadFile("inputs/dayFourInput.txt")
+		check(err)
+		p1 = dayFour.PartOne(string(input))
 	}
 	fmt.Printf("Part one: %d \nPart Two: %d \n", p1, p2)
 }
