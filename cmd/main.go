@@ -40,6 +40,7 @@ func main() {
 		input, err := os.ReadFile("inputs/dayFourInput.txt")
 		check(err)
 		p1 = dayFour.PartOne(string(input))
+		p2 = dayFour.PartTwo(string(input))
 	}
 	fmt.Printf("Part one: %d \nPart Two: %d \n", p1, p2)
 }

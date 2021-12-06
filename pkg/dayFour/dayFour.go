@@ -93,6 +93,53 @@ func PartOne(input string) (ans int) {
 	return
 }
 
+/*
+ - Brute force solution that is similar to part one
+ - Just iterate through nums and keep track of the board state of the last board that won
+ - We will need to track board, marking board, and number that triggered
+ - we also need to make sure that the board is no longer processed if it has already won
+ - calculate winning score at end
+*/
+func PartTwo(input string) (ans int) {
+	bingoNums, bingoBoards := SplitInput(input)
+	bingoBoardsCopy := make([]string, len(bingoBoards))
+	copy(bingoBoardsCopy, bingoBoards)
+	var lastWinningBoard, lastWinningMarkBoard, lastNumberTriggeredWin string
+	alreadyWonMap := map[int]bool{}
+
+	for _, bingoNum := range bingoNums {
+		for bingoBoardIdx, bingoBoard := range bingoBoards {
+			// only process board if it hasnt won
+			if _, ok := alreadyWonMap[bingoBoardIdx]; ok {
+				continue
+			}
+			boardRows := strings.Split(bingoBoard, "\n")
+			for rowIdx, rowVal := range boardRows {
+				rowVals := strings.Fields(rowVal)
+				for colValsIdx, colVal := range rowVals {
+					if string(bingoNum) == string(colVal) {
+						bingoBoardsCopy[bingoBoardIdx] = MarkBoard(bingoBoardsCopy[bingoBoardIdx], rowIdx, colValsIdx)
+						if CheckBoardForWinner(bingoBoardsCopy[bingoBoardIdx], rowIdx, colValsIdx) {
+							lastWinningBoard = bingoBoard
+							lastWinningMarkBoard = bingoBoardsCopy[bingoBoardIdx]
+							lastNumberTriggeredWin = bingoNum
+							alreadyWonMap[bingoBoardIdx] = true
+						} else {
+							goto nextBoard
+						}
+					}
+				}
+			}
+		nextBoard:
+		}
+	}
+
+	bingoNumInt, err := strconv.Atoi(string(lastNumberTriggeredWin))
+	ec.Check(err)
+	ans = CalculateWinningValue(lastWinningBoard, lastWinningMarkBoard, bingoNumInt)
+	return
+}
+
 func CalculateWinningValue(realBoard string, mockBoard string, finalNumCalled int) int {
 	// iterate over real board
 	realBoardRows := strings.Split(realBoard, "\n")

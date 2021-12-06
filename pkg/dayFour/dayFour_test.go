@@ -109,3 +109,12 @@ func TestCalculateWinningBoard(t *testing.T) {
 		t.Errorf("Calculate winner failed got : %d want: %d", got, want)
 	}
 }
+
+func TestPartTwo(t *testing.T) {
+	got := PartTwo(input)
+	want := 1924
+
+	if got != want {
+		t.Errorf("Day 4 Part Two failed got: %d want: %d", got, want)
+	}
+}
