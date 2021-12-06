@@ -44,31 +44,19 @@ func PartOne(rawInput string) (ans int) {
 			for curYval := startEnd[0]; curYval <= startEnd[1]; curYval++ {
 				//create Point for current position
 				curPoint := Point{startPt.x, curYval}
-				if curCounter, exists := hitMap[curPoint]; exists {
-					hitMap[curPoint] = curCounter + 1
-				} else {
-					hitMap[curPoint] = 1
-				}
+				hitPoint(hitMap, curPoint)
 			}
 		} else if startPt.y == endPt.y {
 			startEnd := []int{startPt.x, endPt.x}
 			sort.Ints(startEnd)
 			for curXval := startEnd[0]; curXval <= startEnd[1]; curXval++ {
 				curPoint := Point{curXval, startPt.y}
-				if curCounter, exists := hitMap[curPoint]; exists {
-					hitMap[curPoint] = curCounter + 1
-				} else {
-					hitMap[curPoint] = 1
-				}
+				hitPoint(hitMap, curPoint)
 			}
 		}
 	}
-	// sum up all values in map that are >= 2
-	for _, hits := range hitMap {
-		if hits >= 2 {
-			ans++
-		}
-	}
+
+	ans = finalScoreCalc(hitMap)
 	return
 }
 
@@ -102,22 +90,14 @@ func PartTwo(rawInput string) (ans int) {
 			for curYval := startEnd[0]; curYval <= startEnd[1]; curYval++ {
 				//create Point for current position
 				curPoint := Point{startPt.x, curYval}
-				if curCounter, exists := hitMap[curPoint]; exists {
-					hitMap[curPoint] = curCounter + 1
-				} else {
-					hitMap[curPoint] = 1
-				}
+				hitPoint(hitMap, curPoint)
 			}
 		} else if startPt.y == endPt.y {
 			startEnd := []int{startPt.x, endPt.x}
 			sort.Ints(startEnd)
 			for curXval := startEnd[0]; curXval <= startEnd[1]; curXval++ {
 				curPoint := Point{curXval, startPt.y}
-				if curCounter, exists := hitMap[curPoint]; exists {
-					hitMap[curPoint] = curCounter + 1
-				} else {
-					hitMap[curPoint] = 1
-				}
+				hitPoint(hitMap, curPoint)
 			}
 		} else {
 			// diagonals
@@ -150,7 +130,12 @@ func PartTwo(rawInput string) (ans int) {
 		}
 	}
 	// sum up all values in map that are >= 2
-	for _, hits := range hitMap {
+	ans = finalScoreCalc(hitMap)
+	return
+}
+
+func finalScoreCalc(m map[Point]int) (ans int) {
+	for _, hits := range m {
 		if hits >= 2 {
 			ans++
 		}
