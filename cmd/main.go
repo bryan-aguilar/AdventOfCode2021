@@ -6,6 +6,7 @@ import (
 	"aoc21/pkg/dayFive"
 	"aoc21/pkg/dayFour"
 	dayOne "aoc21/pkg/dayOne"
+	"aoc21/pkg/daySix"
 	"aoc21/pkg/dayThree"
 	dayTwo "aoc21/pkg/dayTwo"
 	"fmt"
@@ -47,6 +48,11 @@ func main() {
 		check(err)
 		p1 = dayFive.PartOne(string(input))
 		p2 = dayFive.PartTwo(string(input))
+	case 6:
+		input, err := os.ReadFile("inputs/daySixInput.txt")
+		check(err)
+		p1 = daySix.PartOne(string(input))
+		p2 = daySix.PartTwo(string(input), 256)
 	}
 	fmt.Printf("Part one: %d \nPart Two: %d \n", p1, p2)
 }
